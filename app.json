@@ -1,0 +1,25 @@
+{
+  "expo": {
+    "name": "PokéPocket",
+    "slug": "pokepocket-expo",
+    "scheme": "pokepocket",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "dark",
+    "backgroundColor": "#0D1424",
+    "ios": {
+      "supportsTablet": true
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptive-icon.png",
+        "backgroundColor": "#0D1424"
+      },
+      "edgeToEdgeEnabled": true
+    },
+    "web": {
+      "name": "PokéPocket"
+    }
+  }
+}
