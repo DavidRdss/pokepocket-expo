@@ -1,4 +1,4 @@
-# ⚡ PokéPocket | Atividade Individual 05
+# PokéPocket | Atividade Individual 05
 
 Aplicativo de **React Native + Expo + TypeScript** que consulta a PokéAPI, exibe os 151 Pokémon de Kanto, possui **navegação entre telas**, utiliza **React Native Paper** e salva Pokémon favoritos com **AsyncStorage**.
 
