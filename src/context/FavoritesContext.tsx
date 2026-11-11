@@ -16,7 +16,7 @@ const FavoritesContext = createContext<FavoritesContextValue | undefined>(undefi
 function isValidPokemon(value: unknown): value is PokemonPreview {
   if (typeof value !== 'object' || value === null) return false;
   const item = value as Partial<PokemonPreview>;
-  return Number.isInteger(item.id) && Number(item.id) > 0 &&
+  return typeof item.id === 'number' && Number.isInteger(item.id) && item.id > 0 &&
     typeof item.name === 'string' && typeof item.artwork === 'string';
 }
 
