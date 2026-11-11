@@ -1,59 +1,62 @@
-# ⚡ PokéPocket
+# ⚡ PokéPocket | Atividade Individual 05
 
-Pokédex desenvolvida em **React Native + Expo + TypeScript**, com consumo real da API pública **PokéAPI**.
+Aplicativo de **React Native + Expo + TypeScript** que consulta a PokéAPI, exibe os 151 Pokémon de Kanto, possui **navegação entre telas**, utiliza **React Native Paper** e salva Pokémon favoritos com **AsyncStorage**.
 
-## Funcionalidades
+## Requisitos atendidos
 
-- Exibe os 151 Pokémon originais de Kanto.
-- Consome dados com requisições HTTP usando fetch.
-- Busca instantânea por nome ou número.
-- Mostra imagens, tipos, habilidades, peso, altura e atributos.
-- Exibe estados de carregamento e falha de rede, com opção de tentar novamente.
-- Atualização da lista por gesto de puxar para baixo.
-- Cache em memória para reduzir requisições à API.
-- Interface em português.
+| Requisito | Implementação |
+| --- | --- |
+| React Native + Expo | Expo SDK 57 e TypeScript |
+| Consumo de API | PokéAPI REST com fetch: lista e fichas detalhadas |
+| Navegação entre telas | React Navigation com duas abas e uma rota Stack |
+| React Native Paper | PaperProvider, tema MD3, Card, Searchbar, Button, Chip, IconButton e ProgressBar |
+| AsyncStorage | Favoritos persistidos localmente entre sessões |
+| Repositório público | https://github.com/DavidRdss/pokepocket-expo |
 
-## Tecnologias
+## As três telas
 
-- React Native
-- Expo SDK 57
-- TypeScript
-- API REST PokéAPI v2
+1. **Explorar:** lista dos 151 Pokémon, busca por nome ou número, arte oficial, botão de favoritos, atualização por gesto e tratamento de erros.
+2. **Favoritos:** mostra os Pokémon salvos no armazenamento do celular, mesmo quando a API está indisponível.
+3. **Detalhes:** rota independente com imagem, tipo, peso, altura, habilidades, atributos e botão para favoritar/desfavoritar.
 
-## Como rodar
+## Como executar
 
-1. Instale Node.js 22.13 ou superior.
-2. Clone o repositório: https://github.com/DavidRdss/pokepocket-expo
-3. Abra a pasta no terminal e execute:
+Requer Node.js 22.13 ou superior, Expo Go compatível com SDK 57 ou emulador.
 
-    npm install
-    npm start
+1. Clone: `git clone https://github.com/DavidRdss/pokepocket-expo.git`
+2. Entre na pasta: `cd pokepocket-expo`
+3. Instale: `npm install`
+4. Inicie: `npx expo start`
+5. Abra o QR Code pelo Expo Go ou execute no emulador.
 
-4. Abra no Expo Go compatível com SDK 57 ou em um emulador Android/iOS. Para instalações compatíveis do Expo Go, consulte https://expo.dev/go.
+Conferência do TypeScript: `npm run typecheck`.
 
-Para conferir tipos: npm run typecheck
+Se o teu Expo Go tiver SDK incompatível, consulta https://expo.dev/go.
 
-## API utilizada
+## Teste dos requisitos
 
-- Lista: https://pokeapi.co/api/v2/pokemon?limit=151&offset=0
-- Detalhes: https://pokeapi.co/api/v2/pokemon/25 (exemplo com Pikachu)
-- Arte: https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/25.png
+- **API:** pesquisa Pikachu em Explorar, toca no card e consulta sua ficha. A API carrega dados em tempo real.
+- **Rotas:** navega entre Explorar e Favoritos, entra na ficha e retorna pela seta da barra superior.
+- **Paper:** Searchbar, cards, ícones, botões, chips e barras de status usam React Native Paper com tema escuro.
+- **AsyncStorage:** toca no coração do Pikachu, abre Favoritos, fecha o aplicativo e abre novamente. O Pokémon continua salvo.
+- **Rede:** sem conexão, o app oferece nova tentativa de acesso à API, enquanto os favoritos anteriormente salvos seguem disponíveis.
 
-A lista é solicitada em apenas uma chamada; os detalhes são buscados sob demanda.
+## Estrutura principal
 
-## Organização
+- `App.tsx`: provedor Paper, tema, abas e Stack navigator.
+- `src/screens/HomeScreen.tsx`: busca, atualização e listagem da API.
+- `src/screens/FavoritesScreen.tsx`: favoritos armazenados no aparelho.
+- `src/screens/PokemonDetailsScreen.tsx`: rota de detalhes.
+- `src/components/PokemonCard.tsx`: card do Paper com botão de coração.
+- `src/context/FavoritesContext.tsx`: estado compartilhado e persistência no AsyncStorage.
+- `src/services/pokeapi.ts`: chamadas HTTP e cache em memória.
+- `src/types/pokemon.ts`: tipos TypeScript.
+- `src/theme/colors.ts` e `src/utils/pokemon.ts`: paleta e formatação.
 
-- App.tsx: tela principal, pesquisa e atualização.
-- src/components/PokemonCard.tsx: cards da listagem.
-- src/components/PokemonDetailsModal.tsx: tela detalhada.
-- src/services/pokeapi.ts: consumo da API e cache.
-- src/types/pokemon.ts: tipos de dados da API.
-- src/utils/pokemon.ts: traduções e formatação.
-- src/theme/colors.ts: paleta de cores.
-- assets/: ícones.
+**Chave AsyncStorage:** `@pokepocket:favorites:v1`. O estado é restaurado antes da primeira gravação, evitando apagar dados antigos. Cada favorito guarda id, nome e URL da imagem.
 
-## Licença e créditos
+**API:** https://pokeapi.co/api/v2/pokemon?limit=151&offset=0
 
-Código sob a licença MIT. Dados fornecidos pela PokéAPI. Nomes e imagens Pokémon pertencem aos respectivos titulares. Projeto educacional e sem finalidade comercial.
+**Referências:** https://docs.expo.dev/ | https://reactnavigation.org/ | https://callstack.github.io/react-native-paper/ | https://react-native-async-storage.github.io/async-storage/ | https://pokeapi.co/docs/v2
 
-Documentação: https://docs.expo.dev/ e https://pokeapi.co/docs/v2
+Projeto educacional, sem finalidade comercial. Dados fornecidos pela PokéAPI; personagens e artes Pokémon pertencem aos seus titulares.
